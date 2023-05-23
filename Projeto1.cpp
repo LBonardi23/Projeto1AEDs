@@ -6,101 +6,114 @@
 using namespace std;
 
 int main(int arcg, char ** argv){
-    float valor,    //Valor do carro.
-        km,         //Quilometragem do automóvel.
-        pmotor,     //Potência do motor. 
-        pctvca,     //Variável para o calculo do segundo exercício. Carro automático e com direção hidráulica.
-        pct2,       //Variável para o calculo do segundo exercício. Câmbio automático e direção hidráulica.
-        md,         //Média de quilometragem dos carros com mais de 5 anos.
-        qt,         //Quantidade total de carros.
-        qs,         //Quantidade de sedans.
-        qp,         //Quantidade de pick-ups.
-        qsu,        //Quantidade de SUVs.
-        qh,         //Quantidade de Hatchs.
-        qpa,        //Quantidade de carros do tipo passeio.
-        qv,         //Quantidade de carros do tipo VAN.
-        menor,      //Variável para guardar o menor valor de um carro.
-        jurosm,     //Variável para calculo do juros do carro de menor valor.
-        segma,      //Variável para o calculo do seguro do carro de maior valor.
-        maior,      //Variável para guardar o maior valor de um carro.
-        km5;        //Variável para guardar a soma dos carros com mais ou 5 anos.
-    int portas,     //Quntas portas possui.
-        ano,        //Qual o ano do modelo.
-        ano5,       //Variável para o calculo de carros com mais ou 5 anos.
-        qkm5;       //Variável para saber a quantidade de carros com mais ou 5 anos.
-    char modelo,    //Qual é o "nome" do carro.
-        marca,      //De qual marca.
-        tipo,       //Tipo do carro. SEDAN/SUV/ETC...
-        comb,       //Qual o combustível é movido o automóvel.
-        camb,       //É câmbio automático ou manual?
-        dire,       //Direção. Hidráulica ou elétrica?
-        cor,        //Cor do carro. 
-        placa,      //Qual é a placa.
-        placam,     //Qual a placa do carro mais barato.
-        placama;    //Qual a placa do carro mais caro.
+
+    //Variáveis com valores em ponto flutuante:
+    float   valor,      //Valor do carro.
+            km,         //Quilometragem do automóvel.
+            pmotor,     //Potência do motor. 
+            pctvca,     //Variável para o calculo do segundo exercício. Carro automático e com direção hidráulica.
+            pct2,       //Variável para o calculo do segundo exercício. Câmbio automático e direção hidráulica.
+            md,         //Média de quilometragem dos carros com mais de 5 anos.
+            qt,         //Quantidade total de carros.
+            qs,         //Quantidade de sedans.
+            qp,         //Quantidade de pick-ups.
+            qsu,        //Quantidade de SUVs.
+            qh,         //Quantidade de Hatchs.
+            qpa,        //Quantidade de carros do tipo passeio.
+            qv,         //Quantidade de carros do tipo VAN.
+            menor,      //Variável para guardar o menor valor de um carro.
+            jurosm,     //Variável para calculo do juros do carro de menor valor.
+            segma,      //Variável para o calculo do seguro do carro de maior valor.
+            maior,      //Variável para guardar o maior valor de um carro.
+            km5;        //Variável para guardar a soma dos carros com mais ou 5 anos.
+
+    //Variáveis com valores inteiros:
+    int     portas,     //Quntas portas possui.
+            ano,        //Qual o ano do modelo.
+            ano5,       //Variável para o calculo de carros com mais ou 5 anos.
+            qkm5;       //Variável para saber a quantidade de carros com mais ou 5 anos.
+
+    //Variáveis literais
+    char    modelo,    //Qual é o "nome" do carro.
+            marca,      //De qual marca.
+            tipo,       //Tipo do carro. SEDAN/SUV/ETC...
+            comb,       //Qual o combustível é movido o automóvel.
+            camb,       //É câmbio automático ou manual?
+            dire,       //Direção. Hidráulica ou elétrica?
+            cor,        //Cor do carro. 
+            placa,      //Qual é a placa.
+            placam,     //Qual a placa do carro mais barato.
+            placama;    //Qual a placa do carro mais caro.
         
-    ifstream teclado ("Carros");    //Leitura do arquivo com os dados fornecidos.
-    if (!teclado.is_open()){    //Condição de negação caso o arquivo não foi encontrado.
-        cout << "\n Erro: Arquivo não encontrado." << endl;     //Mensagem de aviso para a falha de reconhecimento do arquivo.
+    //Leitura do arquivo com os dados fornecidos.
+    ifstream teclado ("BD_veiculos.txt");
+
+    //Condição de negação caso o arquivo não foi encontrado.
+    if (!teclado.is_open()){    
+        cout << "\n Erro: Arquivo não encontrado." << endl;    //Mensagem de aviso para a falha de reconhecimento do arquivo.
         return 1;
     }
 
-        //Esse espaço será reservado para a setagem devalores para a iniciação do problema.{
-    q5 = 0;
-    qh = 0;
-    qp = 0;
+    //Atribuição de valores para as variáveis na inicialização
+    q5  = 0; //falta declarar!!!!!!!!!
+    qh  = 0;
+    qp  = 0;
     qpa = 0;
-    qv = 0;
+    qv  = 0;
     qsu = 0;
-    qs = 0;
-    qr = 0;
+    qs  = 0;
+    qr  = 0; //falta declarar!!!!!!!!!!!!
     km5 = 0;
     menor = 999999999999;
-        //}Esse espaço será reservado para a setagem de valores para a iniciação do problema.
+    modelo = 'START'; // adicionei, porém, não sei se necessário!!!!!!!!
 
+    //Descrição repetição
     while (modelo != 'FIM'){
-        //Todas as linhas que possuem "teclado >>" no início, são linhas em que estamos setando nas variáveis os valores contidos no arquivo de exemplo, de forma sincronizada com o arquivo-modelo.
         teclado >> modelo;
         teclado >> marca;
         teclado >> tipo;
         teclado >> ano;
         teclado >> km;
         teclado >> pmotor;
-        teclado >> comb;
-        telcado >> camb;
+        teclado >> comb; //perguntar se afeta ter 2 variaveis parecidas!!!!!!!!!!
+        telcado >> camb; //camb e comb
         teclado >> dire;
         teclado >> cor;
         teclado >> portas;
         teclado >> placa;
         teclado >> valor;
 
-        qt++;   //Soma gradativa de +1 no valor total.
+        //Quantidade de carro recebe +1 a cada nova leitura
+        qt++;  
                 
-                //Início para a resolução do primeiro problema sobre a porcentagem de cada categoria.
-        if(modelo == 'Sedã'){           //Soma gradativa da quantidade de carros Sedã.
-            qs++;
-        }
-        if(modelo == 'Hatch'){          //Soma gradativa da quantidade de carros Hatch. 
-            qh++;
-        }
-        if(modelo == 'Pick-up'){        //Soma gradativa da quantidade de carros Pick-up.
-            qp++;
-        }
-        if(modelo == 'Passeio'){        //Soma gradativa da quantidade de carros do tipo Passeio.
-            qpa++;
-        }
-        if(modelo == 'SUV'){            //Soma gradativa da quantidade de carros SUV.
-            qsu++;
-        }
-        if(modelo == 'Van'){            //Soma gradativa da quantidade de carros do tipo Van.
-            qv++;
-        }
-                //Fim do primeiro exercício e início do segundo.
+        //Separação do modelo de carro
+        if(modelo == 'Sedã'){
+            qs++;    //modelo Sedã recebe + 1 em sua quantidade total
+        }   else {
+                if (modelo == 'Hatch'){
+                    qh++;    //modelo Hatch recebe + 1 em sua quantidade total
+                }   else {
+                        if (modelo == 'Pick-up'){
+                            qp++;    //modelo Pick-up recebe + 1 em sua quantidade total
+                        }   else {
+                                if (modelo == 'Passeio'){
+                                    qpa++;    //modelo Passeio recebe + 1 em sua quantidade total
+                                }   else {
+                                        if (modelo == 'SUV'){
+                                            qsu++;    //modelo SUV recebe + 1 em sua quantidade total
+                                        }   else {
+                                                qv++;    //modelo Van recebe + 1 em sua quantidade total
+                                            }
+                                    }
+                            }
+                    }
+            }
+        
         if(camb == 'automático' && dire == 'hidráulica'){ //Começo do segundo exercício proposto sobre a porcentagem de carros com câmbio automático e direção hidráulica.
             pctvca++;
         }
                 //Fim do segundo exercício e início do terceiro.
-        if(pmotor = 1.0){
+        if(pmotor == 1.0){
             if(menor < valor){
                 menor << valor;
                 placam << placa;

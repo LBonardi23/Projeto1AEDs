@@ -3,6 +3,9 @@
 #include <fstream>
 #include <math.h>
 
+        //Cabeçalho: Nomes e RA - Leonardo Bonardi Marques Silva 2023.1.08.011 e Vinícius Piotto 2023.1.08.024. Trabalho sobre BD_veículos de AEDs I, data máxima para entrega 31/5. Professor - Paulo Bressan. 
+        //Dica: Podemos fazer o calculo do juros e do seguro  e não guadar o valor em uma variável. Isso otimiza o código.
+
 using namespace std;
 
 int main(int arcg, char ** argv){
@@ -14,13 +17,6 @@ int main(int arcg, char ** argv){
             pctvca,     //Variável para o calculo do segundo exercício. Carro automático e com direção hidráulica.
             pct2,       //Variável para o calculo do segundo exercício. Câmbio automático e direção hidráulica.
             md,         //Média de quilometragem dos carros com mais de 5 anos.
-            qt,         //Quantidade total de carros.
-            qs,         //Quantidade de sedans.
-            qp,         //Quantidade de pick-ups.
-            qsu,        //Quantidade de SUVs.
-            qh,         //Quantidade de Hatchs.
-            qpa,        //Quantidade de carros do tipo passeio.
-            qv,         //Quantidade de carros do tipo VAN.
             menor,      //Variável para guardar o menor valor de um carro.
             jurosm,     //Variável para calculo do juros do carro de menor valor.
             segma,      //Variável para o calculo do seguro do carro de maior valor.
@@ -31,10 +27,17 @@ int main(int arcg, char ** argv){
     int     portas,     //Quntas portas possui.
             ano,        //Qual o ano do modelo.
             ano5,       //Variável para o calculo de carros com mais ou 5 anos.
-            qkm5;       //Variável para saber a quantidade de carros com mais ou 5 anos.
-
+            qkm5,       //Variável para saber a quantidade de carros com mais ou 5 anos.
+            qt,         //Quantidade total de carros.
+            qs,         //Quantidade de sedans.
+            qp,         //Quantidade de pick-ups.
+            qsu,        //Quantidade de SUVs.
+            qh,         //Quantidade de Hatchs.
+            qpa,        //Quantidade de carros do tipo passeio.
+            qv;         //Quantidade de carros do tipo VAN.
+  
     //Variáveis literais
-    char    modelo,    //Qual é o "nome" do carro.
+    char    modelo,     //Qual é o "nome" do carro.
             marca,      //De qual marca.
             tipo,       //Tipo do carro. SEDAN/SUV/ETC...
             comb,       //Qual o combustível é movido o automóvel.
@@ -55,17 +58,16 @@ int main(int arcg, char ** argv){
     }
 
     //Atribuição de valores para as variáveis na inicialização
-    q5  = 0; //falta declarar!!!!!!!!!
+    qk5 = 0; 
     qh  = 0;
     qp  = 0;
     qpa = 0;
     qv  = 0;
     qsu = 0;
     qs  = 0;
-    qr  = 0; //falta declarar!!!!!!!!!!!!
     km5 = 0;
-    menor = 999999999999;
-    modelo = 'START'; // adicionei, porém, não sei se necessário!!!!!!!!
+    menor = 999999999999;   //Valor máximo para que o valor a ser lido passe a ser a variável de comparação.
+    modelo = 'START';       //Atribuição de inicialização para que a variável "modelo" não receba lixo do computador.      
 
     //Descrição repetição
     while (modelo != 'FIM'){
@@ -134,12 +136,12 @@ int main(int arcg, char ** argv){
                 //Fim do quinto exercício.
     }           //Fim da repetição.
             
-            //Espaço dedicado para os cálculos das informações pedidas que precisam ser feita fora da repetição.
-    jurosm = ;                          //Calculo para saber o jutos da prestação do carro mais barato em 48 parcelas.
-    segma = ;                           //Calculo para saber quanto custa o seguro do carro mais caro.
-    ano5 << 2023 - ano;                 //Calculo para saber se o carro tem ou mais de 5 anos.
-    md << km5/qkm5;                     //Calculo das médias dos km rodados pelos carros com mais de 5 anos.
-            //Fim do espaço para os cálculos fora da repetição.       
+            //Espaço dedicado para os cálculos das informações pedidas que precisam ser feita fora da repetição. Temporário.
+    jurosm = ;                          //Calculo para saber o jutos da prestação do carro mais barato em 48 parcelas. Porém no final não precisamos adicionar esse cálculo em uma variável, mas apenas no cout.
+    segma = ;                           //Calculo para saber quanto custa o seguro do carro mais caro. Porém no final não precisamos adicionar esse cálculo em uma variável, mas apenas no cout.
+    ano5 << 2023 - ano;                 //Calculo para saber se o carro tem ou mais de 5 anos. Essa variável está fora da repetição. Isso está correto? Acho que não.
+    md << km5/qkm5;                     //Calculo das médias dos km rodados pelos carros com mais de 5 anos. Essa variável está fora da repetição. Isso está correto? Acho que não.
+            //Fim do espaço para os cálculos fora da repetição. Temporário.
             
             //Início das printagens/informações sobre os exercícios.
     cout << "\n A porcentagem de carros do tipo sedã é de: %" << (qs/qt)*100 << endl;
@@ -157,6 +159,8 @@ int main(int arcg, char ** argv){
             //Fim do cout do quarto exercício e início do quinto.
     cout << "\n A quantidade de quilometros rodados para carros com ou mais de 5 anos foi de: " << km5 << "\n A média de quilometros rodados entre esses carros foi de: " << md << endl;
             //Fim dos cout.
+    
+    teclado.close();        //Fim da abertura do arquivo.
     
     return 0;
     

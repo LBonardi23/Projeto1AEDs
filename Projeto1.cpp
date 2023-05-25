@@ -17,6 +17,13 @@ int main(int arcg, char ** argv){
             pctvca,     //Variável para o calculo do segundo exercício. Carro automático e com direção hidráulica.
             pct2,       //Variável para o calculo do segundo exercício. Câmbio automático e direção hidráulica.
             md,         //Média de quilometragem dos carros com mais de 5 anos.
+            qt,         //Quantidade total de carros.
+            qs,         //Quantidade de Sedans.
+            qp,         //Quantidade de Pick-ups.
+            qsu,        //Quantidade de SUVs.
+            qh,         //Quantidade de Hatchs.
+            qpa,        //Quantidade de carros do tipo passeio.
+            qv,         //Quantidade de carros do tipo VAN.
             menor,      //Variável para guardar o menor valor de um carro.
             jurosm,     //Variável para calculo do juros do carro de menor valor.
             segma,      //Variável para o calculo do seguro do carro de maior valor.
@@ -24,8 +31,8 @@ int main(int arcg, char ** argv){
             km5;        //Variável para guardar a soma dos carros com mais ou 5 anos.
 
     //Variáveis com valores inteiros:
-    int     portas,     //Quntas portas possui.
-            ano,        //Qual o ano do modelo.
+    int     portas,     //Quantidade de portas do carro.
+            ano,        //Ano do modelo.
             ano5,       //Variável para o calculo de carros com mais ou 5 anos.
             qkm5,       //Variável para saber a quantidade de carros com mais ou 5 anos.
             qt,         //Quantidade total de carros.
@@ -37,16 +44,16 @@ int main(int arcg, char ** argv){
             qv;         //Quantidade de carros do tipo VAN.
   
     //Variáveis literais
-    char    modelo,     //Qual é o "nome" do carro.
-            marca,      //De qual marca.
-            tipo,       //Tipo do carro. SEDAN/SUV/ETC...
-            comb,       //Qual o combustível é movido o automóvel.
-            camb,       //É câmbio automático ou manual?
-            dire,       //Direção. Hidráulica ou elétrica?
-            cor,        //Cor do carro. 
-            placa,      //Qual é a placa.
-            placam,     //Qual a placa do carro mais barato.
-            placama;    //Qual a placa do carro mais caro.
+    char    modelo,     //Modelo do carro.
+            marca,      //Marca do carro.
+            tipo,       //Tipo do carro.
+            comb,       //Combustível utilizado pelo carro.
+            camb,       //Classificação entre Câmbio automático ou Manual.
+            dire,       //Classificação da direção entre Hidráulica ou Elétrica.
+            cor,        //Cor do carro.
+            placa,      //Placa do carro.
+            placam,     //Placa do carro mais barato.
+            placama;    //Placa do carro mais caro.
         
     //Leitura do arquivo com os dados fornecidos.
     ifstream teclado ("BD_veiculos.txt");
@@ -66,10 +73,10 @@ int main(int arcg, char ** argv){
     qsu = 0;
     qs  = 0;
     km5 = 0;
-    menor = 999999999999;   //Valor máximo para que o valor a ser lido passe a ser a variável de comparação.
-    modelo = 'START';       //Atribuição de inicialização para que a variável "modelo" não receba lixo do computador.      
+    menor = 999999999999;
+    modelo = 'START';
 
-    //Descrição repetição
+    //Descrição repetição!!!!!!
     while (modelo != 'FIM'){
         teclado >> modelo;
         teclado >> marca;
@@ -77,8 +84,8 @@ int main(int arcg, char ** argv){
         teclado >> ano;
         teclado >> km;
         teclado >> pmotor;
-        teclado >> comb; //perguntar se afeta ter 2 variaveis parecidas!!!!!!!!!!
-        telcado >> camb; //camb e comb
+        teclado >> comb; 
+        telcado >> camb; 
         teclado >> dire;
         teclado >> cor;
         teclado >> portas;
@@ -110,58 +117,59 @@ int main(int arcg, char ** argv){
                             }
                     }
             }
-        
-        if(camb == 'automático' && dire == 'hidráulica'){ //Começo do segundo exercício proposto sobre a porcentagem de carros com câmbio automático e direção hidráulica.
+
+        //Separação para o exercicio de porcentagem de veículos com câmbio automático e com direção hidráulica entre todos os veículos.
+        if(camb == 'automático' && dire == 'hidráulica'){ 
             pctvca++;
         }
-                //Fim do segundo exercício e início do terceiro.
-        if(pmotor == 1.0){
-            if(menor < valor){
-                menor << valor;
-                placam << placa;
+
+        //Separação para o exercicio de placa e valor do veículo mais barato entre os veículos com potência do motor 1.0.
+        if(pmotor == 1.0 && menor < valor){
+            menor << valor;
+            placam << placa;
             }
+        
+        //Separação para o exercicio de placa e valor do veículo mais caro com direção hidráulica e combustível flex.
+        if(dire == 'Hidráulica' && comb == 'Flex' && valor > maior){
+            maior << valor;
+            placama << placa;
         }
-                //Fim do terceiro exercício e início do quarto. 
-        if(dire == 'Hidráulica' && comb == 'Flex'){
-            if(valor > maior){
-                maior << valor;
-                placama << placa;
-            }
-        }
-                //Fim do quarto exercício e início o quinto.
+
+        //Separação para a quantidade e média de kilometragem dos veículos com 5 anos ou mais (2018).
         if(ano5 >= 5){
             km5 = km5+km;
             qkm5++;
         }
-                //Fim do quinto exercício.
-    }           //Fim da repetição.
-            
-            //Espaço dedicado para os cálculos das informações pedidas que precisam ser feita fora da repetição. Temporário.
-    jurosm = ;                          //Calculo para saber o jutos da prestação do carro mais barato em 48 parcelas. Porém no final não precisamos adicionar esse cálculo em uma variável, mas apenas no cout.
-    segma = ;                           //Calculo para saber quanto custa o seguro do carro mais caro. Porém no final não precisamos adicionar esse cálculo em uma variável, mas apenas no cout.
-    ano5 << 2023 - ano;                 //Calculo para saber se o carro tem ou mais de 5 anos. Essa variável está fora da repetição. Isso está correto? Acho que não.
-    md << km5/qkm5;                     //Calculo das médias dos km rodados pelos carros com mais de 5 anos. Essa variável está fora da repetição. Isso está correto? Acho que não.
-            //Fim do espaço para os cálculos fora da repetição. Temporário.
-            
-            //Início das printagens/informações sobre os exercícios.
+    }    //Fim da repetição da linha 71.
+
+    //Espaço dedicado para os cálculos das informações pedidas.
+    jurosm = ;            //Calculo para saber o valor da prestação do carro mais barato em 48 parcelas.
+    segma = ;             //Calculo para saber quanto custa o seguro do carro mais caro.
+    ano5 << 2023 - ano;   //Calculo para saber se o carro tem ou mais de 5 anos.
+    md << km5/qkm5;       //Calculo das médias dos km rodados pelos carros com mais de 5 anos.       
+        
+    //Porcentagens de veículos nas categorias de tipo.
     cout << "\n A porcentagem de carros do tipo sedã é de: %" << (qs/qt)*100 << endl;
     cout << "\n A porcentagem de carros do tipo hatch é de: %" << (qh/qt)*100 << endl;
     cout << "\n A porcentagem de carros do tipo pick-up é de: %" << (qp/qt)*100 << endl;
     cout << "\n A porcentagem de carros do tipo passeio é de: %" << (qpa/qt)*100 << endl;
     cout << "\n A porcentagem de carros do tipo SUV é de: %" << (qsu/qt)*100 << endl;
     cout << "\n A porcentagem de carros do tipo van é de: %" << (qv/qt)*100 << endl;
-            //Fim dos couts do primeiro exercício e começo do segundo.
+            
+    //Porcentagem de veículos com câmbio automático e com direção hidráulica entre todos os veículos.
     cout << "\n A porcentagem de carros que possuem câmbio automático e direção hidráulica entre todos os veículos é de: %" << (pctvca/qt)*100 << endl;
-            //Fim do cout do segundo exercício e início do terceiro.
-    cout << "\n A placa do veículo 1.0 mais barato é: " << placam << "\n O valor desse carro é de: " << menor << "E o valor da prestação desse carro em 48 vezes com juros anuais é de: " << jurosm << endl; 
-            //Fim do cout do terceiro exercício e início do quarto.
+
+    //Placa e valor do veículo mais barato entre os veículos com potência do motor 1.0, e ainda, valor da prestação do financiamento em 48 meses com taxa de juros atuais.
+    cout << "\n A placa do veículo 1.0 mais barato é: " << placam << "\n O valor desse carro é de: " << menor << "E o valor da prestação desse carro em 48 vezes com juros anuais é de: " << jurosm << endl;
+
+    //Placa e valor do veículo mais caro com direção hidráulica e combustível flex, e ainda, valor do seguro estimado (porcentagem estimada sobre o valor do veículo)
     cout << "\n A placa do veículo mais caro é: " << placama << "\n O valor desse carro é de: " << maior << "\n E o valor do seguro para este carro é de: " << segma << endl;
-            //Fim do cout do quarto exercício e início do quinto.
+
+    //Quantidade e média de kilometragem dos veículos com 5 anos ou mais (2018).
     cout << "\n A quantidade de quilometros rodados para carros com ou mais de 5 anos foi de: " << km5 << "\n A média de quilometros rodados entre esses carros foi de: " << md << endl;
-            //Fim dos cout.
-    
-    teclado.close();        //Fim da abertura do arquivo.
+   
+    teclado.close();    //Fim da abertura do arquivo.
     
     return 0;
-    
+
 }
